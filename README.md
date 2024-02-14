@@ -149,3 +149,16 @@ need to rebuild the Docker image if you've made changes to the
 Dockerfile or installed new dependencies. However, since we're using
 volume mapping, your local changes will still reflect in the container
 without rebuilding the image.
+
+# Build and run
+
+To build it run the follwoing command:
+```bash
+docker build -t weather-app:v1 .
+```
+
+To run it use this:
+```bash
+docker run -p  3000:3000 -v ${PWD}:/app -e CHOKIDAR_USEPOLLING=true weather-app:v1
+```
+
