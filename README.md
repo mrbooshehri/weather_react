@@ -18,7 +18,7 @@ A live demo of the application is available at [GitHub Pages URL].
 
 ## Screenshots
 
-![Screenshot of the Weather App](./screenshot.png)
+![Screenshot of the Weather App](assets/weather_app.jpeg)
 
 ## Installation
 
