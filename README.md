@@ -1,5 +1,3 @@
-# Weather react app
-
 # Weather App React Demo
 
 This repository contains a simple React application that fetches and
@@ -77,3 +75,77 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 If you have any questions or feedback, please contact me.
+
+# Setup development env with dokcer
+
+1. **Install Docker**: If you haven't already, install Docker Desktop on
+   your machine. It includes both Docker Engine and Docker Compose,
+   which will be useful for managing multi-container applications.
+
+2. **Create a Dockerfile**: In the root directory of your React project,
+   create a file named `Dockerfile`. This file will contain instructions
+   for building a Docker image of your application.
+
+3. **Define the Dockerfile**: Open the Dockerfile in a text editor and
+   add the following content:
+
+```Dockerfile
+# Use an official Node runtime as the base image
+FROM node:14
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Copy package.json and package-lock.json into the working directory
+COPY package*.json ./
+
+# Install any needed packages specified in package.json
+RUN npm install
+
+# Bundle app source inside Docker image
+COPY . .
+
+# Make port  3000 available to the world outside this container
+EXPOSE  3000
+
+# Define the command to run your app using CMD which defines your runtime
+CMD ["npm", "start"]
+```
+
+This Dockerfile starts with a Node.js base image, sets the working
+directory, copies over your `package.json` and `package-lock.json`,
+installs your dependencies, copies the rest of your code, exposes port
+3000 (the default port for React apps), and finally runs `npm start` to
+start your application.
+
+4. **Build the Docker Image**: Run the following command in your
+   terminal from the same directory as your Dockerfile:
+
+```sh
+docker build -t my-react-app .
+```
+
+Replace `my-react-app` with whatever name you want to give your Docker
+image.
+
+5. **Run the Docker Container**: After the image is built, you can run
+   it with the following command:
+
+```sh
+docker run -p  3000:3000 -v ${PWD}:/app -e CHOKIDAR_USEPOLLING=true my-react-app
+```
+
+This command maps port  3000 inside the container to port  3000 on your
+host machine, mounts your current directory (`${PWD}`) to `/app` inside
+the container, and sets an environment variable that helps with hot
+reloading when files change.
+
+6. **Access Your Application**: Open your web browser and navigate to
+   `http://localhost:3000`. You should see your React application
+   running.
+
+Remember that every time you make changes to your application, you may
+need to rebuild the Docker image if you've made changes to the
+Dockerfile or installed new dependencies. However, since we're using
+volume mapping, your local changes will still reflect in the container
+without rebuilding the image.
