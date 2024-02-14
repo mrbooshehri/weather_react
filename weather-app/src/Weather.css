@@ -1,0 +1,34 @@
+/* src/Weather.css */
+
+body {
+  background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN);
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.weather-container {
+  text-align: center;
+  padding:  2rem;
+  background-color: #f9f9f9;
+  border-radius:  8px;
+  box-shadow:  0  2px  4px rgba(0,  0,  0,  0.1);
+  display: table-cell;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.weather-title {
+  font-size:  1.5rem;
+  margin-bottom:  1rem;
+}
+
+.weather-details {
+  font-size:  1rem;
+  color: #333;
+}
+
